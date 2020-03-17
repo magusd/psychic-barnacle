@@ -7,7 +7,7 @@ git clone
 composer install
 npm install
 npm build
-php artisan migrate
+php artisan migrate --seed
 ```
 
 ## Tests

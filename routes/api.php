@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/websites','WebsitesController@index');
+Route::post('/websites',function(Request $request){
+    return $request->all();
+});
