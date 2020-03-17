@@ -19,6 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/websites','WebsitesController@index');
-Route::post('/websites',function(Request $request){
-    return $request->all();
-});
+Route::post('/websites','WebsitesController@store');

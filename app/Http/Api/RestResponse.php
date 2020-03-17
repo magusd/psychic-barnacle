@@ -8,17 +8,17 @@ use Illuminate\Http\Response;
 
 trait RestResponse
 {
-    public function ok($data = null) : Response
+    public function ok($data = []) : Response
     {
         return $this->response($data,200);
     }
 
-    public function created($data = null) : Response
+    public function created($data = []) : Response
     {
         return $this->response($data,201);
     }
 
-    public function updated($data = null) : Response
+    public function updated($data = []) : Response
     {
         return $this->response($data,204);
     }
@@ -28,7 +28,7 @@ trait RestResponse
         $this->error($data, 404);
     }
 
-    public function unprocessable(array $data) : Response
+    public function unprocessable(array $data = []) : Response
     {
         return $this->error($data,422);
     }

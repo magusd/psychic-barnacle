@@ -14,18 +14,42 @@ class WebsiteTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testFetchWebsites()
     {
         $website = Website::create([
             'url' => $this->faker->url,
             'name' => $this->faker->name
         ]);
 
-        $response = $this->get('api/websites')->assertJsonFragment([
-            'url' => $website->url
-        ]);
+        $response = $this->get('api/websites')
+            ->assertJsonFragment([
+                'id' => $website->id,
+                'url' => $website->url,
+                'name' => $website->name
+            ])
+            ->assertStatus(200);
+    }
 
-        dump($response);
-        $response->assertStatus(200);
+    public function testCreateWebsite()
+    {
+        $website = new Website([
+            'url' => $this->faker->url,
+            'name' => $this->faker->name,
+        ]);
+        $response = $this->post('api/websites',$website->toArray());
+        $response->assertStatus(201);
+        $db = Website::where('url',$website->url)->first();
+        $this->assertEquals($db->url,$website->url);
+    }
+
+    public function testWebsiteValidation()
+    {
+        $website = new Website([
+            'url' => $this->faker->url,
+//            'name' => $this->faker->name,
+        ]);
+        $response = $this->post('api/websites',$website->toArray());
+        $response->assertStatus(422);
+
     }
 }

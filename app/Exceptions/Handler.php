@@ -2,11 +2,14 @@
 
 namespace App\Exceptions;
 
+use App\Http\Api\RestResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use RestResponse;
     /**
      * A list of the exception types that are not reported.
      *
@@ -50,6 +53,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        switch (get_class($exception)){
+            case ValidationException::class:
+                /* @var $exception ValidationException */
+                return $this->unprocessable($exception->errors());
+        }
         return parent::render($request, $exception);
     }
 }

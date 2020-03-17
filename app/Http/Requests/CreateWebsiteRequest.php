@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
 class CreateWebsiteRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class CreateWebsiteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,8 @@ class CreateWebsiteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'url' => 'required',
+            'name' => 'required'
         ];
     }
 }
