@@ -47,13 +47,6 @@ trait RestResponse
 
     public function response(array $data, int $status) : Response
     {
-        $payload = '';
-        if($data){
-            $payload = [
-                'status' => $status,
-                'data' => $data
-            ];
-        }
-        return response($payload,$status);
+        return response($data,$status);
     }
 }
