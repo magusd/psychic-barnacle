@@ -5,19 +5,18 @@
 ```bash
 git clone 
 composer install
-npm install
-npm build
 php artisan migrate --seed
+yarn install
 ```
 
-## Tests
+## TDD
 
 ```bash
 composer tdd
 ```
 
 ## Run
-
+### Nuxt Server
 ```bash
-docker-compose up
+yarn start
 ```
