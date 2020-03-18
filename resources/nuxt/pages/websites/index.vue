@@ -28,13 +28,10 @@
         computed: {
             websites () {
                 return this.allWebsites.filter(website => website.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1);
-                return this.allWebsites;
-                // return this.$store.state.websites.all;//.filter(post => post.id !== this.id)
             },
         },
         async fetch () {
-
-            this.allWebsites = await this.$http.$get('api/websites');
+            this.allWebsites = await this.$axios.$get('api/websites');
         }
     }
 </script>

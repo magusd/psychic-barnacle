@@ -51,9 +51,13 @@ module.exports = laravelNuxt({
   */
   modules: [
       '@nuxt/http',
+      '@nuxtjs/axios',
   ],
 
     http: {
+        // proxyHeaders: false
+    },
+    axios: {
         // proxyHeaders: false
     },
 
