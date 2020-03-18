@@ -4,14 +4,16 @@
 namespace App\Http\Api\Fractal;
 
 
+use Illuminate\Pagination\Paginator;
+
 abstract class BaseFractal
 {
-    abstract public function transform($data);
+    abstract public function transform($page);
 
-    public function transformMany($data)
+    public function transformMany(Paginator $page)
     {
         return array_map(function($item){
            return $this->transform($item);
-        },$data);
+        },$page->items());
     }
 }

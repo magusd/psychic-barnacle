@@ -56,11 +56,6 @@
                         for (let value of Object.entries(error.response.data.error)) {
                             here.errors.push(value[1][0]);
                         }
-                        // for(err of error.response.data.error){
-                        //     console.log(err);
-                        // }
-                    // .filter( function (key, value) {
-                    // });
                 });
             }
         }
