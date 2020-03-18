@@ -7,7 +7,7 @@
         <nuxt-link :to="{name: 'websites'}" class="logo text-lg">
             Websites
         </nuxt-link>
-        <nuxt-link :to="{name: 'websites/create'}" class="logo text-lg">
+        <nuxt-link :to="'websites/create'" class="logo text-lg">
             Add
         </nuxt-link>
 

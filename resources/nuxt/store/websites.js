@@ -15,5 +15,11 @@ export const state = () => ({
       name: 'How can I fix this problem?',
       url: 'http://google.com'
     }
-  ]
-})
+  ],
+    // mutations: {
+    //     update (state, websites) {
+    //         // mutate state
+    //         state.all = await this.$http.$get('api/websites')
+    //     }
+    // }
+});
