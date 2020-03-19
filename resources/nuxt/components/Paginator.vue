@@ -40,13 +40,19 @@
             }
         },
         mounted () {
-            this.setPages()
+            this.setPages();
+            let here = this;
+            this.$store.subscribe(function(newValue){
+                if(newValue.type === 'paginator/setLastPage'){
+                    here.setPages();
+                }
+            });
         },
         methods: {
             setPages () {
                 let pages = [];
                 let last = this.$store.state.paginator.totalPageCount;
-                for (let i = 1; i <= 6; i++) {
+                for (let i = 1; i <= last; i++) {
                     pages.push(i);
                 }
                 this.pageNumbers = pages;
