@@ -13,12 +13,16 @@
                 </li>
             </ul>
         </aside>
+        <h1>-----</h1>
+        <Paginator/>
     </div>
 </template>
 
 <script>
+    import Paginator from "~/components/Paginator";
     export default {
         name: "index",
+        components: {Paginator},
         data () {
             return {
                 allWebsites: [],
@@ -31,11 +35,33 @@
             },
         },
         async fetch () {
-            this.allWebsites = await this.$axios.$get('api/websites');
+            this.fetchWebsites();
+        },
+        methods: {
+           fetchWebsites: async function() {
+              let page = this.$route.query.page || 0;
+              var results = await this.$axios.$get('api/websites?page='+page);
+              this.$store.commit('paginator/setLastPage',results['pagination']['last']);
+              this.allWebsites = results['data'];
+          }
+        },
+        watch:{
+            $route (to, from){
+                this.fetchWebsites();
+            }
         }
     }
 </script>
 
 <style scoped>
+    .pagination {
+        display: inline-block;
+    }
 
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
 </style>

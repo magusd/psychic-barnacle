@@ -14,7 +14,7 @@ class WebsitesController extends Controller
     public function index(WebsiteFractal $fractal)
     {
         $data = [];
-        if($websites = Website::simplePaginate())
+        if($websites = Website::paginate(10))
             $data = $fractal->transformMany($websites);
         return $this->ok($data);
     }

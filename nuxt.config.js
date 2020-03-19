@@ -6,11 +6,6 @@ module.exports = laravelNuxt({
   mode: 'universal',
 
   generate: {
-    routes: [
-      '/posts/balut',
-      '/posts/whereIsIt',
-      '/posts/how'
-    ]
   },
 
   /*

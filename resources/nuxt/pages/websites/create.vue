@@ -49,10 +49,8 @@
                         here.name = "";
                         here.errors = [];
                         here.success = true;
-                        console.log(data);
                     }).
                     catch(function(error) {
-                        console.log(error.response.data.error);
                         for (let value of Object.entries(error.response.data.error)) {
                             here.errors.push(value[1][0]);
                         }

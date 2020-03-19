@@ -4,7 +4,7 @@
 namespace App\Http\Api\Fractal;
 
 
-use Illuminate\Pagination\Paginator;
+use Illuminate\Contracts\Pagination\Paginator;
 
 abstract class BaseFractal
 {
@@ -12,8 +12,17 @@ abstract class BaseFractal
 
     public function transformMany(Paginator $page)
     {
-        return array_map(function($item){
+        $data = array_map(function($item){
            return $this->transform($item);
         },$page->items());
+
+        return [
+            'data' => $data,
+            'pagination' => [
+                'current' => $page->currentPage(),
+                'next' => $page->nextPageUrl(),
+                'last' => $page->lastPage(),
+            ]
+        ];
     }
 }
