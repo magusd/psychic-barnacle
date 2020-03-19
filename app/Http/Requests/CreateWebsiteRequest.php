@@ -25,7 +25,7 @@ class CreateWebsiteRequest extends FormRequest
     public function rules()
     {
         return [
-            'url' => 'required',
+            'url' => 'required|unique:websites',
             'name' => 'required'
         ];
     }

@@ -6,14 +6,13 @@
         <p v-if="$fetchState.pending">Fetching websites...</p>
         <p v-else-if="$fetchState.error">Error while fetching posts: {{ $fetchState.error.message }}</p>
         <aside v-else>
-            <input v-model="search" type="text" value="" placeholder="filter..">
+            <input v-model="search" v-on:keyup="fetchWebsites()" type="text" value="" placeholder="filter..">
             <ul>
                 <li v-for="website in websites" :key="website.id">
                     <a :href="website.url">{{website.name}}</a>
                 </li>
             </ul>
         </aside>
-        <h1>-----</h1>
         <Paginator/>
     </div>
 </template>
@@ -40,7 +39,13 @@
         methods: {
            fetchWebsites: async function() {
               let page = this.$route.query.page || 0;
-              var results = await this.$axios.$get('api/websites?page='+page);
+              var results = await this.$axios.$request({
+                  'url':'api/websites',
+                  params:{
+                      page,
+                      search:this.search
+                  }
+              });
               this.$store.commit('paginator/setLastPage',results['pagination']['last']);
               this.allWebsites = results['data'];
           }

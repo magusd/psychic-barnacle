@@ -7,14 +7,22 @@ use App\Http\Api\RestResponse;
 use App\Http\Requests\CreateWebsiteRequest;
 use App\Website;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WebsitesController extends Controller
 {
     use RestResponse;
-    public function index(WebsiteFractal $fractal)
+    public function index(WebsiteFractal $fractal,Request $request)
     {
         $data = [];
-        if($websites = Website::paginate(10))
+        $websites = new Website();
+        if($request->input('search')){
+            $search = strtolower($request->input('search'));
+            $websites = $websites->where(
+                'name','like', "%$search%"
+            );
+        }
+        if($websites = $websites->paginate(10))
             $data = $fractal->transformMany($websites);
         return $this->ok($data);
     }

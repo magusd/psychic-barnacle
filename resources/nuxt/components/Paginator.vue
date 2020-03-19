@@ -2,11 +2,11 @@
     <nav id="pagination">
         <ul class="page-guides" v-if="this.$store.state.paginator.totalPageCount > 1">
             <li>
-                <nuxt-link v-if="$route.query.page && $route.query.page > 1" :to="{ path: $route.path, query: { page: 1 }}">First</nuxt-link>
+                <nuxt-link v-if="currentPage > 1" :to="{ path: $route.path, query: { page: 1 }}">First</nuxt-link>
                 <a href="#" class="active" v-else>First</a>
             </li>
             <li>
-                <nuxt-link v-if="$route.query.page > 1" :to="{ path: $route.path, query: { page: currentPage - 1 }}">Previous</nuxt-link>
+                <nuxt-link v-if="currentPage > 1" :to="{ path: $route.path, query: { page: currentPage - 1 }}">Previous</nuxt-link>
                 <a href="#" class="active" v-else>Previous</a>
             </li>
             <li v-for="num in this.pageNumbers" v-bind:style="{ width: (100 / pageNumbers.length) + '%' }">
@@ -14,14 +14,15 @@
                 <a v-else href="#" class="active">{{ num }}</a>
             </li>
             <li>
-                <nuxt-link v-if="$route.query.page < $store.state.paginator.totalPageCount" :to="{ path: $route.path, query: { page: currentPage + 1 }}"> Next</nuxt-link>
+                <nuxt-link v-if="currentPage < $store.state.paginator.totalPageCount" :to="{ path: $route.path, query: { page: currentPage + 1 }}"> Next</nuxt-link>
                 <a href="#" class="active" v-else>Next</a>
             </li>
             <li>
-                <nuxt-link v-if="$route.query.page < $store.state.paginator.totalPageCount" :to="{ path: $route.path, query: { page: $store.state.paginator.totalPageCount }}">Last</nuxt-link>
+                <nuxt-link v-if="currentPage < $store.state.paginator.totalPageCount" :to="{ path: $route.path, query: { page: $store.state.paginator.totalPageCount }}">Last</nuxt-link>
                 <a href="#" class="active" v-else>Last</a>
             </li>
         </ul>
+        <h1>{{$store.state.paginator.totalPageCount}}</h1>
     </nav>
 </template>
 
