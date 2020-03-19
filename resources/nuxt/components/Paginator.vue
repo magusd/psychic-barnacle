@@ -22,7 +22,6 @@
                 <a href="#" class="active" v-else>Last</a>
             </li>
         </ul>
-        <h1>{{$store.state.paginator.totalPageCount}}</h1>
     </nav>
 </template>
 
